@@ -56,9 +56,11 @@ order by c.country;
 -- 1
 select count_name as num_appereance, count(count_name) as num_of_tracks
 from (
-select t.track_id, count(t.track_id)
-from track t
-group by t.track_id)
+select track.track_id, count(playlist_track.track_id) as count_name
+from track
+join playlist_track
+on track.track_id = playlist_track.track_id
+group by track.track_id)
 group by count_name
 order by count_name DESC;
 
